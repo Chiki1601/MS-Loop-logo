@@ -1,0 +1,88 @@
+*
+{
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body
+{
+	font-size: 2vmin;
+	height: 100vh;
+	background: #131923;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.microsoft-loop
+{
+  --hole-size: 6em;
+  --clr-purple: #8262c4;
+  --clr-cyan: #45c6fd;
+  
+	position: relative;
+	height: 35em;
+	width: 35em;
+  border-radius: 100% 100% 100% 0;
+  overflow: hidden;
+  filter: drop-shadow( 0 0 5em rgba( 0,0,0,.5 ) );
+}
+
+.microsoft-loop::before,
+.microsoft-loop::after
+{
+	content: '';
+	display: block;
+}
+
+.microsoft-loop::before
+{
+  --mask: radial-gradient(
+       circle var( --hole-size ),
+       transparent calc( var( --hole-size ) - .04em ),
+       #000 calc( var( --hole-size ) + .025em )
+    );
+    
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from -135deg,
+    var( --clr-purple ) 10%,
+    var( --clr-cyan ) 90%
+  );
+  -webkit-mask-image: var( --mask );
+  mask-image: var( --mask );
+  
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 0,
+    calc( 50% - var( --hole-size ) ) 50%,
+    calc( 50% - var( --hole-size ) ) calc( 50% + var( --hole-size ) ),
+    50% calc( 50% + var( --hole-size ) ),
+    calc( 50% - var( --hole-size ) ) 50%
+  );
+}
+
+.microsoft-loop::after
+{
+  --size: calc( 50% - var( --hole-size ) );
+  
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: var( --size );
+  width: var( --size );
+  border-radius: 0 0 1000000em 0;
+  background: var( --clr-purple );
+  box-shadow: 0 0 2em .7em rgba( 0,0,0,.5 );
+  clip-path: polygon(
+    1px 1px,
+    150% 1px,
+    100% 100%,
+    1px 150%
+  );
+}
